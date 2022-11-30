@@ -31,9 +31,49 @@ class Hotel {
         array_push($this->_rooms,$newRoom);
     }
 
+    public function countRooms(){
+        return count($this->_rooms);
+    }
+    public function countReservedRooms(){
+        $i = 0;
+        foreach($this->_rooms as $room){
+            if($room->getDisponibility() == false){
+                $i++;
+            }
+        }
+        return $i;
+    }
+
+    public function getHotelInfo(){
+        $roomDispo = $this->countRooms()-$this->countReservedRooms();
+
+        echo $this->getName()."<br>".
+            $this->getAdress()."<br>
+            Nombre de chambres : ".$this->countRooms()."<br>
+            Nombre de chambres réservées : ".$this->countReservedRooms()."<br>
+            Nombre de chambres dispo : ".$roomDispo."<br>";
+    }
+
+    public function getHotelReservation(){
+        echo "Réservations de l'hôtel ".$this->getName()."<br><div>".
+            $this->countReservedRooms()." RÉSERVATION";
+            // rajouté un S pour le pluriels
+                if($this->countReservedRooms() > 1){
+                    echo "S";
+                };
+        echo "</div><br>";
+
+        foreach($this->_rooms as $room){
+            var_dump($room);
+            if($room->getDisponibility() == false){
+                echo $room->getReservation()->getUser()." - ".$room->getName()." - du ".$room->getReservation()->getDateBegging()." au ".$room->getReservation()->getDateEnd()."<br>";
+            }
+        }
+            
+    }
+
     public function listRoom(){
-        echo "Statuts des chambres de ".$this->getName().
-        "<br>   
+        echo "Statuts des chambres de ".$this->getName()."<br>   
             <tr>
                 <th>Chambre</th>
                 <th>Prix</th>

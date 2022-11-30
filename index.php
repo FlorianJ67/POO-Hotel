@@ -25,4 +25,12 @@ $chambre18 = new Room("Chambre 18",300,2,$hotel1);
 $chambre19 = new Room("Chambre 19",300,2,$hotel1);
 
 
+
+$reservation1 = new Reservation("01-01-2021","02-01-2021",$user1,$chambre2);
+$reservation2 = new Reservation("04-02-2020","02-01-2024",$user2,$chambre1);
+
+$hotel1->getHotelInfo();
+echo "<br>";
+$hotel1->getHotelReservation();
+
 ?>

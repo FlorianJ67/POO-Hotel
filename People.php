@@ -28,10 +28,10 @@ class People {
         return $this->_birthday;
     }
 
-    public function displayFullName(){
-        $this->getFName();
-        return " ";
-        $this->getName();
+    public function __toString(){
+        return $this->getFName();
+        echo " ";
+        return $this->getName();
     }
         
     //SET
@@ -48,7 +48,6 @@ class People {
         $this->_birthday = $birthday;
     } 
 
-    
     public function addReserv($reservation){
         array_push($this->_reservation,$reservation);
     }

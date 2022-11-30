@@ -13,9 +13,10 @@ class Reservation {
         $this->_user->addReserv($this);
 
         $this->_room = $room;
-        $this->_room->changeEtat();        
+        $this->_room->changeEtat();
+        $this->_room->addReserv($this);     
     }
-            
+        
     //GET
     public function getDateBegging(){
         return $this->_dateBeg;
