@@ -1,7 +1,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Titre de la page</title>
+  <title>Poo Hotel</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
