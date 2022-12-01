@@ -1,101 +1,130 @@
 <?php
-class Hotel {
+class Hotel
+{
     private string $_name;
     private $_rooms;
     private $_adress;
-        
-    public function __construct($name,$adress){
+    private $_reservations;
+
+    public function __construct($name, $adress)
+    {
         $this->_name = $name;
         $this->_adress = $adress;
 
         $this->_rooms = [];
+        $this->_reservations = [];
     }
-            
+
     //GET
-    public function getName(){
+    public function getName()
+    {
         return $this->_name;
     }
-    public function getAdress(){
+    public function getAdress()
+    {
         return $this->_adress;
     }
-       
+
     //SET
-    public function setName($name){
+    public function setName($name)
+    {
         $this->_name = $name;
     }
 
 
-
-    
-    public function addRoom($newRoom){
-        array_push($this->_rooms,$newRoom);
+    public function addReserv($reservation){
+        array_push($this->_reservations,$reservation);
     }
 
-    public function countRooms(){
+    public function addRoom($newRoom)
+    {
+        array_push($this->_rooms, $newRoom);
+    }
+
+    public function countRooms()
+    {
         return count($this->_rooms);
     }
-    public function countReservedRooms(){
+    public function countReservedRooms()
+    {
         $i = 0;
-        foreach($this->_rooms as $room){
-            if($room->getDisponibility() == false){
+        foreach ($this->_rooms as $room) {
+            if ($room->getDisponibility() == false) {
                 $i++;
             }
         }
         return $i;
     }
 
-    public function getHotelInfo(){
-        $roomDispo = $this->countRooms()-$this->countReservedRooms();
+    public function getHotelInfo()
+    {
+        $roomDispo = $this->countRooms() - $this->countReservedRooms();
 
-        echo $this->getName()."<br>".
-            $this->getAdress()."<br>
-            Nombre de chambres : ".$this->countRooms()."<br>
-            Nombre de chambres réservées : ".$this->countReservedRooms()."<br>
-            Nombre de chambres dispo : ".$roomDispo."<br>";
+        echo $this->getName() . "<br>" .
+            $this->getAdress() . "<br>
+            Nombre de chambres : " . $this->countRooms() . "<br>
+            Nombre de chambres réservées : " . $this->countReservedRooms() . "<br>
+            Nombre de chambres dispo : " . $roomDispo . "<br>";
     }
 
-    public function getHotelReservation(){
-        echo "Réservations de l'hôtel ".$this->getName()."<br><div>".
-            $this->countReservedRooms()." RÉSERVATION";
-            // rajouté un S pour le pluriels
-                if($this->countReservedRooms() > 1){
-                    echo "S";
-                };
+    public function getHotelReservation()
+    {
+        echo "Réservations de l'hôtel " . $this->getName() . "<br><div>" .
+            $this->countReservedRooms() . " RÉSERVATION";
+        // rajouté un S pour le pluriels
+        if ($this->countReservedRooms() > 1) {
+            echo "S";
+        };
         echo "</div><br>";
+        foreach ($this->_reservations as $reserv) {
 
-        foreach($this->_rooms as $room){
-            var_dump($room);
-            if($room->getDisponibility() == false){
-                echo $room->getReservation()->getUser()." - ".$room->getName()." - du ".$room->getReservation()->getDateBegging()." au ".$room->getReservation()->getDateEnd()."<br>";
+            echo $reserv->getUser() . " - " . $reserv->getRoom()->getName() . " - du " . $reserv->getDateBegging() . " au " . $reserv->getDateEnd() . "<br>";
+            if ($reserv->getRoom()->getDisponibility() == false) {
             }
         }
-            
     }
 
-    public function listRoom(){
-        echo "Statuts des chambres de ".$this->getName()."<br>   
-            <tr>
-                <th>Chambre</th>
-                <th>Prix</th>
-                <th>Wifi</th>
-                <th>État</th>
-            </tr>";
-        foreach($this->_rooms as $room){
+    public function listRoom()
+    {
+        echo "Statuts des chambres de " . $this->getName() . "<br>   
+        <table> 
+            <thead>   
+                <tr>
+                    <th>Chambre</th>
+                    <th>Prix</th>
+                    <th>Wifi</th>
+                    <th>État</th>
+                </tr>
+            </thead><tbody> ";
+        foreach ($this->_rooms as $room) {
             echo "<tr>
-                    <th>"
-                        .$room->getName().
-                    "</th>
                     <td>"
-                        .$room->getPrice().
-                    "</td>
-                    <th>"
-                        .$room->getWifi().
-                    "</th>
-                    <th>"
-                        .$room->getEtat().
-                    "</th>
+                . $room->getName() .
+                "</td>
+                    <td>"
+                . $room->getPrice() . " €" .
+                "</td>
+                    <td>";
+                if ($room->getWifi() == true)
+                {
+                    echo "&#x1f4f6";//wifi logo
+                }
+                echo "</td>
+                    <td>";
+                if ($room->getDisponibility() == true)
+                {
+                    echo '<p class="green">Disponible</p>';
+                } else 
+                {
+                    echo '<p class="red">Réservée</p>';
+                }
+                echo "</td>
                 </tr>";
         }
+        echo "</tbody></table>";
+    }
+
+    public function __toString(){
+        return $this->getName();
     }
 }
-?>

@@ -6,7 +6,7 @@ class Room {
     private bool $_wifi;
     private bool $_disponibility;
     private $_hotel;
-    private $_reservation;
+    private $_reservations;
         
     public function __construct($name,$price,$bedNb,Hotel $hotel){
         $this->_name = $name;
@@ -14,7 +14,7 @@ class Room {
         $this->_bedNb = $bedNb;
         $this->_wifi = false;
         $this->_disponibility = true;
-        $this->_reservation =[];
+        $this->_reservations =[];
 
         $this->_hotel = $hotel;
         $this->_hotel->addRoom($this);
@@ -36,8 +36,11 @@ class Room {
     public function getDisponibility(){
         return $this->_disponibility;
     }
+    public function getHotel(){
+        return $this->_hotel;
+    }
     public function getReservation(){
-        return $this->_reservation;
+        return $this->_reservations;
     }
        
     //SET
@@ -58,7 +61,7 @@ class Room {
     }
 
     public function addReserv($reservation){
-        array_push($this->_reservation,$reservation);
+        array_push($this->_reservations,$reservation);
     }
     
     public function changeEtat(){

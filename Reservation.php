@@ -4,9 +4,10 @@ class Reservation {
     private $_dateEnd;
     private $_user;
     private $_room;
+    private $_hotel;
 
         
-    public function __construct($beggining,$end,People $user,Room $room){
+    public function __construct($beggining,$end,User $user,Room $room,Hotel $hotel){
         $this->_dateBeg = $beggining;
         $this->_dateEnd = $end;
         $this->_user = $user;
@@ -14,7 +15,12 @@ class Reservation {
 
         $this->_room = $room;
         $this->_room->changeEtat();
-        $this->_room->addReserv($this);     
+        $this->_room->addReserv($this);   
+        
+        $this->_hotel = $hotel;
+        $this->_hotel->addReserv($this);
+        //remove hotel from construct and the 2 ligne up this one if
+        //$this->_hotel = $this->_room->getHotel();
     }
         
     //GET
@@ -29,6 +35,9 @@ class Reservation {
     }
     public function getRoom(){
         return $this->_room;
+    }
+    public function getHotel(){
+        return $this->_hotel;
     }
        
     //SET
