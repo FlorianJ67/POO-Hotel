@@ -1,5 +1,14 @@
+#container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+p {
+    color: rgb(62, 58, 58);
+}
 table {
     width: 80%;
+    color: rgb(62, 58, 58);
 }
 table td {
     text-align: center;
@@ -17,15 +26,30 @@ tr td:nth-child(4){
 thead tr th{
     background-color: white;
 }
+.bold {
+    font-weight: bold;
+}
 .red {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     color: white;
     background-color: #ce2727;
     border-radius: 5px;
     width: 50%;
+    height: 25px;
 }
 .green {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     color: white;
     background-color: #40c528;
     border-radius: 5px;
     width: 50%;
+    height: 25px;
+}
+.reservation {
+    width: 150px;
+    text-align: center;
 }

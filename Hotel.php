@@ -8,7 +8,9 @@ class Hotel
 
     public function __construct($name, $adress)
     {
-        $this->_name = $name;
+        //remplace "*" by a star logo on the hotel's name
+        $newName = str_replace("*","⭐",$name);
+        $this->_name = $newName;
         $this->_adress = $adress;
 
         $this->_rooms = [];
@@ -60,33 +62,37 @@ class Hotel
     {
         $roomDispo = $this->countRooms() - $this->countReservedRooms();
 
-        echo $this->getName() . "<br>" .
-            $this->getAdress() . "<br>
-            Nombre de chambres : " . $this->countRooms() . "<br>
-            Nombre de chambres réservées : " . $this->countReservedRooms() . "<br>
-            Nombre de chambres dispo : " . $roomDispo . "<br>";
+        echo "<h2>" . $this->getName() . "</h2>
+            <p>" . $this->getAdress() . "</p>
+            <p>Nombre de chambres : " . $this->countRooms() . "</p>
+            <p>Nombre de chambres réservées : " . $this->countReservedRooms() . "</p>
+            <p>Nombre de chambres dispo : " . $roomDispo . "</p>";
     }
 
     public function getHotelReservation()
     {
-        echo "Réservations de l'hôtel " . $this->getName() . "<br><div>" .
-            $this->countReservedRooms() . " RÉSERVATION";
+        echo "<h2>Réservations de l'hôtel " . $this->getName() . '</h2>';
+        if ($this->countReservedRooms() > 0) {
+            echo '<p class="green reservation">' . $this->countReservedRooms() . " RÉSERVATION";
         // rajouté un S pour le pluriels
         if ($this->countReservedRooms() > 1) {
             echo "S";
         };
-        echo "</div><br>";
+        echo "</p>";
         foreach ($this->_reservations as $reserv) {
 
-            echo $reserv->getUser() . " - " . $reserv->getRoom()->getName() . " - du " . $reserv->getDateBegging() . " au " . $reserv->getDateEnd() . "<br>";
+            echo '<p><bold class="bold">' . $reserv->getUser() . "</bold> - " . $reserv->getRoom()->getName() . " - du " . $reserv->getDateBegging() . " au " . $reserv->getDateEnd() . "</p>";
             if ($reserv->getRoom()->getDisponibility() == false) {
             }
         }
+    } else {
+        echo"<p>Aucune réservation</p>";
+    }
     }
 
     public function listRoom()
     {
-        echo "Statuts des chambres de " . $this->getName() . "<br>   
+        echo "<h2>Statuts des chambres de " . $this->getName() . "</h2>   
         <table> 
             <thead>   
                 <tr>

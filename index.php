@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id= "container">
 <h1>Hotel</h1>
 
 <?php
@@ -31,7 +32,9 @@ $chambre17 = new Room("Chambre 17",300,2,$hotel1);
 $chambre18 = new Room("Chambre 18",300,2,$hotel1);
 $chambre19 = new Room("Chambre 19",300,2,$hotel1);
 
+//activated the wifi for the room n°3 & 16
 $chambre3->setWifi(true);
+$chambre16->setWifi(true);
 
 
 
@@ -41,13 +44,14 @@ $reservation3 = new Reservation("05-01-2021","10-01-2021",$user1,$chambre17,$hot
 $reservation2 = new Reservation("04-02-2020","02-01-2024",$user2,$chambre1,$hotel1);
 
 $hotel1->getHotelInfo();
-echo "<br><br>";
+
 $hotel1->getHotelReservation();
-echo "<br><br>";
+
+$hotel2->getHotelReservation();
 $user1->getUserReservation();
-echo "<br><br>";
+
 $hotel1->listRoom();
 
 ?>
-
+</div>
 </body>

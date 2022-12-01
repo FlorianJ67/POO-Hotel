@@ -61,18 +61,20 @@ class User {
 
     public function getUserReservation()
     {
-        echo "Réservations de l'utilisateur " . $this . "<br><div>" .
+        echo "<h2>Réservations de l'utilisateur " . $this . '</h2><p class="green reservation">' .
             $this->countReserved() . " RÉSERVATION";
         // rajouté un S pour le pluriels
         if ($this->countReserved() > 1) {
             echo "S";
         };
-        echo "</div><br>";
+        echo "</p>";
 
+        //create $totalprice to count during the foreach
         $totalPrice = 0;
+
         foreach ($this->_reservations as $reserv) {
 
-            echo $reserv->getHotel() . " - " . $reserv->getRoom()->getName() . " (" . $reserv->getRoom()->getBedNb() . " lit";
+            echo '<p><bold class="bold">' . $reserv->getHotel() . "</bold> - " . $reserv->getRoom()->getName() . " (" . $reserv->getRoom()->getBedNb() . " lit";
             //add S for pluriels
             if($reserv->getRoom()->getBedNb() > 1) {
                 echo "s";
@@ -94,9 +96,9 @@ class User {
             $dateDif = date_diff($date1 ,$date2);
             $totalPrice += $dateDif->format("%d") * $reserv->getRoom()->getPrice();
 
-            echo $dateDif->format("%d"). "<br>";
+            echo $dateDif->format("%d"). "</p>";
         }
-        echo "Prix total : " . $totalPrice . " €<br>";
+        echo "<p>Prix total : " . $totalPrice . " €</p>";
     }
 
 }
